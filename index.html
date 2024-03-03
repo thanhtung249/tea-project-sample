@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Swap Demo Tutorial</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/vendor/jquery/jquery-3.5.0.js"></script>
+  </head>
+  <body>
+    <div class="overlay-common" id="overlay">
+    </div>
+    <div class="main-wrapper">
+        <div class="header">
+            <div class="logo">
+                <a href="#">
+                    <img src="assets/images/logo.png" alt="">
+                </a>
+                <!-- <div class="text-m">Web3 Finance</div> -->
+            </div>
+            <!-- <div class="tabs">
+                <a href="#" class="active">Swap</a>
+                <a href="#">Pool</a>
+                <a href="#">Farm</a>
+            </div> -->
+            <div class="menu-right">
+                <button id="login_button" class="btn btn-main" data-toggle="modal" data-target="#popupWallet">Connect Wallet</button>
+                <div id="connected_wallet" class="option-account" data-toggle="modal" data-target="#popupAccount"></div>
+                <div class="item more">
+                    <a href="#" class="btn">
+                        <svg width="24" height="4" viewBox="0 0 24 4" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="1.99951" r="2" fill="white"></circle><circle cx="11.9995" cy="1.99951" r="2" fill="white"></circle><circle cx="22.0005" cy="1.99951" r="2" fill="white"></circle></svg>
+                    </a>
+                    <div class="more-menu">
+                        <div class="more-memu--item">
+                            <span>About</span>
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="7" cy="7" r="6.5" stroke="white"></circle>
+                                <rect x="6" y="3" width="2" height="2" rx="1" fill="white"></rect>
+                                <rect x="6" y="6" width="2" height="5" rx="1" fill="white"></rect>
+                            </svg>
+                        </div>
+                        <div class="more-memu--item">
+                                <span><a href="https://twitter.com/w3binfinity" class="bt" target="_blank" style="text-decoration:none; color:white">Twitter</a></span>
+                                <svg width="17" height="14" viewBox="0 0 17 14" fill="white" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.2105 1.66291C15.6053 1.94441 14.9597 2.1291 14.2972 2.21022C15.0018 1.75693 15.5205 1.06586 15.759 0.262565C15.1136 0.671874 14.3993 0.960892 13.6509 1.11562C13.3494 0.766982 12.9767 0.487013 12.5579 0.294574C12.1391 0.102135 11.684 0.00168835 11.2231 0C9.38216 0 7.90168 1.5859 7.90168 3.53355C7.90348 3.80547 7.93083 4.07662 7.98335 4.34343C5.22657 4.19056 2.76844 2.7902 1.13397 0.646499C0.834741 1.19295 0.679374 1.80656 0.682484 2.42961C0.676797 3.00271 0.808208 3.56885 1.06574 4.08082C1.32328 4.59278 1.69949 5.03572 2.16296 5.37268C1.6325 5.35039 1.11599 5.19597 0.660324 4.9234V4.96658C0.660324 6.68434 1.80246 8.10802 3.32377 8.43477C3.03863 8.51262 2.74435 8.55186 2.44878 8.55147C2.23889 8.54964 2.02945 8.5317 1.8223 8.49779C2.24229 9.89814 3.46843 10.9146 4.92673 10.9484C3.77276 11.9219 2.31225 12.4567 0.802652 12.4584C0.534466 12.4607 0.2664 12.4462 0 12.4153C1.50155 13.4477 3.28083 14.0002 5.1029 14C11.2114 14 14.5527 8.61799 14.5527 3.94666C14.5527 3.79379 14.5527 3.63974 14.5422 3.48687C15.1965 2.97657 15.7604 2.36001 16.2105 1.66291Z"></path>
+                                </svg>
+                        </div>
+                        <div class="more-memu--item">
+                                <span><a href="https://t.me/w3binfinity" class="bt" target="_blank" style="text-decoration:none;color:white">Telegram</a></span>
+                                <svg width="17" height="14" viewBox="0 0 17 14" fill="white" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
+                                </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="swap-main">
+            <div class="swap-box">
+                <div class="swap-header">
+                    <div class="title">Swap</div>
+                    <div class="swap-action" id="">
+                        <svg class="icon-setting" width="24" height="24" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" data-v-6b911989="" style="width: 24px; height: 24px;"><path d="M13.0004 16.6004C14.9887 16.6004 16.6004 14.9887 16.6004 13.0004C16.6004 11.0121 14.9887 9.40039 13.0004 9.40039C11.0121 9.40039 9.40039 11.0121 9.40039 13.0004C9.40039 14.9887 11.0121 16.6004 13.0004 16.6004Z" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M22.1469 11.0745L20.8296 7.89376L22.6 5.8L20.2 3.4L18.1176 5.17954L14.8694 3.84369L14.1224 1H11.7772L11.0189 3.88136L7.84529 5.21915L5.8 3.4L3.4 5.8L5.14404 7.94662L3.847 11.1356L1 11.8V14.2L3.88133 14.9866L5.2189 18.1596L3.4 20.2L5.8 22.6L7.94939 20.8484L11.0764 22.1348L11.8 25H14.2L14.9254 22.1358L18.1061 20.8186C18.6363 21.1976 20.2 22.6 20.2 22.6L22.6 20.2L20.8191 18.0993L22.1367 14.9176L24.9999 14.1726L25 11.8L22.1469 11.0745Z" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                        
+                        <div class="menu-layout">
+                            <div class="overlay"></div>
+                            <div class="transaction-settings">
+                                <div class="menu-layout-title">Transaction Settings</div>
+                                <span class="menu-layout-label"> 
+                                    Slippage tolerance <div class="tooltip-box">
+                                        <span class="qa">?</span>
+                                        <div class="tooltip">
+                                            Your transaction will revert if the price changes unfavorably by more than this percentage.
+                                        </div>
+
+                                    </div>
+                                </span>
+                                <div class="form-box">
+                                    <!-- <button class="btn btn-main">Auto</button> -->
+                                    <div class="form-input">
+                                        <input type="text" class="form-control" id="slippage_config" value="0.5">
+                                        <span class="per">%</span>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swap-body">
+                    <div class="swap-input-box" id="from_token_select">
+                        <input id="from_amount" class="input" inputmode="decimal" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false">
+                        <button class="btn-currency-select"  data-toggle="modal" data-target="#selectToken">
+                            <img id="from_token_img" src="https://assets.coingecko.com/coins/images/22884/thumb/BNB_wh_small.png?1644224553" alt="logo" class="logo" >
+                            <span id="from_token_text" class="currency-select__name" >BNB</span>
+                            <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg" class="button__select__chevron"><path d="M0.97168 1L6.20532 6L11.439 1" class="icon--light"></path></svg>
+                        </button>
+                        <div class="currency-panel__info__balance">
+                            <span id="balance_mini" class="balance-text">Balance: 0</span>
+                            <div id="set_balance_mini" class="button-mini">MAX</div>
+                        </div>
+                    </div>
+                    <div class="arrow-switch">
+                        <div class="arrow-down" id="transform_button">
+                            <svg class="icon-1" width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg" style=""><path d="M7 13.3135L1.3471 7.65268M7 13.3135L7 1M7 13.3135L10.5 9.81836L12.6608 7.66057" stroke="white" stroke-width="1.4" stroke-linecap="square"></path></svg>
+                            <svg class="icon-2" width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.50383 10.1531L7.15674 13.8139L7.15674 1.50042" stroke="white" stroke-width="1.4" stroke-linecap="square"></path><path d="M17.9644 5.65581L12.3096 1.99895L12.3182 14.3124" stroke="white" stroke-width="1.4" stroke-linecap="square"></path></svg>
+                        </div>
+                    </div>
+                    <div class="swap-input-box" id="to_token_select">
+                        <input id="to_amount" class="input" inputmode="decimal" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false">
+                        <button class="btn-currency-select currency-select--selected"   data-toggle="modal" data-target="#selectToken">
+                            <div class="currency-select">
+                                <span id="to_select_token"class="currency-select__name" >Select token</span>
+                                <img id="to_token_img"  alt="logo" class="logo" style="display: none;" />
+                                <span id="to_token_text" class="currency-select__name"></span>
+                            </div>
+                            <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg" class="button__select__chevron"><path d="M0.97168 1L6.20532 6L11.439 1" class="icon--light"></path>
+                            </svg>
+                        </button>
+                        <!-- <div class="currency-panel__info__balance">
+                            <span class="balance-text">Balance: 7.997</span>
+                            <div class="button-mini">MAX</div>
+                        </div> -->
+                    </div>
+                    <div id="swap_connect" class="swap-actions">
+                        <button class="btn btn-main"  data-toggle="modal" data-target="#popupWallet">Connect Wallet </button>
+                    </div>
+                    <div id="swap_module" style="display: none;">
+                      <div class="accordion">
+                        <div class="accordion__top flex justify--space-between align--center active">
+                            <div class="accordion__top--text flex align--center">
+                                <svg class="dSbiPJ" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span id="from_to_token"></span>
+                            </div>
+                            <div class="accordion__top--img flex align--center">
+                                <svg class="accordion__top--svg active" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8F96AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="accordion__content">
+                            <div class="accordion__content--top">
+                                <div class="flex justify--space-between">
+                                    <div class="flex align--center justify--space-between">
+                                        <span class="text-left">Expected Output</span>
+                                        <span class="vue-tooltip right" data-tip="The amount you expect to receive at the current market price. You may receive less or more if the market price changes while your transaction is pending.">
+                                        <div class="ques-div" data-v-6468dd56="">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" data-v-6468dd56="">
+                                                <circle cx="8" cy="8" r="7" stroke="white" stroke-width="1.4" data-v-6468dd56=""></circle>
+                                                <path d="M8.12009 4C7.31223 4 6.67904 4.23077 6.20961 4.69231C5.72926 5.15385 5.5 5.79121 5.5 6.6044H6.74454C6.74454 6.13187 6.83188 5.76923 7.01747 5.51648C7.23581 5.21978 7.57424 5.07692 8.04367 5.07692C8.41485 5.07692 8.70961 5.17582 8.91703 5.38462C9.11354 5.59341 9.22271 5.87912 9.22271 6.24176C9.22271 6.51648 9.12445 6.78022 8.92795 7.02198L8.79694 7.17582C8.08734 7.81319 7.66157 8.27473 7.51965 8.57143C7.36681 8.86813 7.30131 9.23077 7.30131 9.64835V9.8022H8.55677V9.64835C8.55677 9.38462 8.61135 9.14286 8.72052 8.92308C8.81878 8.72527 8.9607 8.53846 9.15721 8.38462C9.68122 7.92308 9.99782 7.62637 10.0961 7.51648C10.3581 7.16484 10.5 6.71429 10.5 6.16484C10.5 5.49451 10.2817 4.96703 9.84498 4.58242C9.4083 4.18681 8.82969 4 8.12009 4ZM7.92358 10.3407C7.68341 10.3407 7.4869 10.4176 7.33406 10.5714C7.15939 10.7253 7.08297 10.9231 7.08297 11.1648C7.08297 11.4066 7.15939 11.6044 7.33406 11.7582C7.4869 11.9121 7.68341 12 7.92358 12C8.16376 12 8.36026 11.9231 8.53493 11.7692C8.68777 11.6154 8.77511 11.4066 8.77511 11.1648C8.77511 10.9231 8.68777 10.7253 8.53493 10.5714C8.37118 10.4176 8.16376 10.3407 7.92358 10.3407Z" fill="white" data-v-6468dd56=""></path>
+                                            </svg>
+                                        </div>
+                                        </span>
+                                    </div>
+                                    <span id="expected_output"></span>
+                                </div>
+                                <div class="accordion__content--impact flex justify--space-between">
+                                    <div class="flex align--center justify--space-between">
+                                        <span class="text-left">Price Impact</span>
+                                        <span class="vue-tooltip right" data-tip="The difference between the market price and estimated price due to trade size.">
+                                        <div class="ques-div" data-v-6468dd56="">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" data-v-6468dd56="">
+                                                <circle cx="8" cy="8" r="7" stroke="white" stroke-width="1.4" data-v-6468dd56=""></circle>
+                                                <path d="M8.12009 4C7.31223 4 6.67904 4.23077 6.20961 4.69231C5.72926 5.15385 5.5 5.79121 5.5 6.6044H6.74454C6.74454 6.13187 6.83188 5.76923 7.01747 5.51648C7.23581 5.21978 7.57424 5.07692 8.04367 5.07692C8.41485 5.07692 8.70961 5.17582 8.91703 5.38462C9.11354 5.59341 9.22271 5.87912 9.22271 6.24176C9.22271 6.51648 9.12445 6.78022 8.92795 7.02198L8.79694 7.17582C8.08734 7.81319 7.66157 8.27473 7.51965 8.57143C7.36681 8.86813 7.30131 9.23077 7.30131 9.64835V9.8022H8.55677V9.64835C8.55677 9.38462 8.61135 9.14286 8.72052 8.92308C8.81878 8.72527 8.9607 8.53846 9.15721 8.38462C9.68122 7.92308 9.99782 7.62637 10.0961 7.51648C10.3581 7.16484 10.5 6.71429 10.5 6.16484C10.5 5.49451 10.2817 4.96703 9.84498 4.58242C9.4083 4.18681 8.82969 4 8.12009 4ZM7.92358 10.3407C7.68341 10.3407 7.4869 10.4176 7.33406 10.5714C7.15939 10.7253 7.08297 10.9231 7.08297 11.1648C7.08297 11.4066 7.15939 11.6044 7.33406 11.7582C7.4869 11.9121 7.68341 12 7.92358 12C8.16376 12 8.36026 11.9231 8.53493 11.7692C8.68777 11.6154 8.77511 11.4066 8.77511 11.1648C8.77511 10.9231 8.68777 10.7253 8.53493 10.5714C8.37118 10.4176 8.16376 10.3407 7.92358 10.3407Z" fill="white" data-v-6468dd56=""></path>
+                                            </svg>
+                                        </div>
+                                        </span>
+                                    </div>
+                                    <span class="" id="price_impact" ></span>
+                                </div>
+                                <!-- <div class="accordion__content--impact flex justify--space-between">
+                                    <div class="flex align--center justify--space-between">
+                                        <span class="text-left">Liquidity Provider Fee</span>
+                                        <span class="vue-tooltip right" data-tip="For each trade a 0.30% fee is paid.">
+                                        <div class="ques-div" data-v-6468dd56="">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" data-v-6468dd56="">
+                                                <circle cx="8" cy="8" r="7" stroke="white" stroke-width="1.4" data-v-6468dd56=""></circle>
+                                                <path d="M8.12009 4C7.31223 4 6.67904 4.23077 6.20961 4.69231C5.72926 5.15385 5.5 5.79121 5.5 6.6044H6.74454C6.74454 6.13187 6.83188 5.76923 7.01747 5.51648C7.23581 5.21978 7.57424 5.07692 8.04367 5.07692C8.41485 5.07692 8.70961 5.17582 8.91703 5.38462C9.11354 5.59341 9.22271 5.87912 9.22271 6.24176C9.22271 6.51648 9.12445 6.78022 8.92795 7.02198L8.79694 7.17582C8.08734 7.81319 7.66157 8.27473 7.51965 8.57143C7.36681 8.86813 7.30131 9.23077 7.30131 9.64835V9.8022H8.55677V9.64835C8.55677 9.38462 8.61135 9.14286 8.72052 8.92308C8.81878 8.72527 8.9607 8.53846 9.15721 8.38462C9.68122 7.92308 9.99782 7.62637 10.0961 7.51648C10.3581 7.16484 10.5 6.71429 10.5 6.16484C10.5 5.49451 10.2817 4.96703 9.84498 4.58242C9.4083 4.18681 8.82969 4 8.12009 4ZM7.92358 10.3407C7.68341 10.3407 7.4869 10.4176 7.33406 10.5714C7.15939 10.7253 7.08297 10.9231 7.08297 11.1648C7.08297 11.4066 7.15939 11.6044 7.33406 11.7582C7.4869 11.9121 7.68341 12 7.92358 12C8.16376 12 8.36026 11.9231 8.53493 11.7692C8.68777 11.6154 8.77511 11.4066 8.77511 11.1648C8.77511 10.9231 8.68777 10.7253 8.53493 10.5714C8.37118 10.4176 8.16376 10.3407 7.92358 10.3407Z" fill="white" data-v-6468dd56=""></path>
+                                            </svg>
+                                        </div>
+                                        </span>
+                                    </div>
+                                    <span>0.02398986 APT</span>
+                                </div> -->
+                            </div>
+                            <div class="accordion__content--bot flex justify--space-between" id="slippage_token"></div>
+                        </div>
+                      </div>
+                      <div class="impact-block flex justify--space-between">
+                        <span>Estimated Gas</span>
+                        <span id="estimated_gas"></span>
+                      </div>
+                      <!-- <div class="impact-block flex justify--space-between alerting">
+                          <span>Price Impact Warning</span>
+                          <span>-91.38%</span>
+                      </div> -->
+                      <div class="swap-actions">
+                          <button id="swap_button" class="btn btn-main"  data-toggle="modal" data-target="#confirmSwap" onClick="trySwap" >Swap</button>
+                      </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="social">
+                <a href="https://twitter.com/w3binfinity" class="bt" target="_blank">
+                    <img class="twitter-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAmCAYAAAC/H3lnAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAI6SURBVHgBzZiBdYIwEIYPnwPYDegEdQTdwG6AE9ROIBvUDaQT1A1gA9sJoBPoBtc7c/RhCmLgQvneO4EAyZ/zckkAGAhEnJFtyVKyExpOch2RheAKVwoeoHpfKiKbyFl4nSbp6Ma+sSLbgzLSmAtbERmJ98vOhHbFh/IFUALdxTaxqau8+pf1Fs0eQR3iap3lyazmwV6i6f0E+7NHE6o7NA6N2rzxgR1GL+p5t0p8bwM52QIcQOMVTXZ1jbSlnT3e6W16LkZPYieV888WHRFZ7iJcgSQIgqsMURX8DvcRgRHO8c250stkI3zbBb+CqScJHQq4nxUZTzQcSkc0I3mDJt69dWJqXa/JUnBnLqbN2S64eJi8MmfPkJczunyF8VDYBWVIcE9SEp3TMSTLYBz88XDAPzJwTjA+HuhfvxJ98bAUZjAuClss0yWtDcVXXWGftOabQ13hxLpew3jI6gqvBEtaG4PojLQUdTdsD5ehsYT/DY9u4wmv91VDkd/SNG0QegSTtEPwuC5owN27qLuedfIudv0+IS8PTdSmLbghmldfvHIbKiR4Zntse2jSdINe5h0Ip7gz+IfbWIIGaDaoGlv2W2xAGxHOOwreGrVtWF2IwRdoBuMb6pGAL6jyBepmjgS0QeNRDoMUdYmhIwGaRM3GI3Um55zSnuSomda4jWdZZHUDh8kCDH8G0Ou8R+EpOn6b6yKcvZFjd3I06xH1WTK4dRPN9Fwax3QoVnIWK8DswXh2bFx8a/ADm+PRhMM6d3cAAAAASUVORK5CYII=" alt="">
+                    <span class="text">Twitter</span>
+                </a>
+                <a href="https://t.me/w3binfinity" class="bt" target="_blank">
+                    <img class="telegram-img" src="https://www.w3binfinity.io/assets/images/footer/telegram.svg" alt="">
+                    <span class="text">Telegram</span>
+                </a>
+            </div>
+            <div class="copyright">
+                © 2022 W3binfinity Finance. All Rights Reserved
+            </div>
+        </div>
+    </div>
+    <!-- Connect to multiple wallet, now just only support Metamask -->
+    <!-- <div class="popup-fix" id="popupWallet">
+        <div class="overlay"></div>
+        <div class="popup-content">
+            <div class="popup-head">
+                <div class="title">Connect to a wallet</div>
+                <div class="close">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" data-v-1cdb86ff=""><circle cx="8" cy="8" r="7.4" stroke="white" stroke-width="1.2" data-v-1cdb86ff=""></circle><line x1="4.39361" y1="11.4644" x2="11.4647" y2="4.39334" stroke="white" stroke-width="1.2" data-v-1cdb86ff=""></line><line x1="4.5351" y1="4.3941" x2="11.6062" y2="11.4652" stroke="white" stroke-width="1.2" data-v-1cdb86ff=""></line></svg>
+                </div>
+            </div>
+            <div class="popup-body">
+                <div class="wallet-list">
+                    <div class="item">
+                        <div class="text-content">
+                            <div class="title">Install Martian Wallet</div>
+                            
+                        </div>
+                        <div class="icon">
+                            <img src="assets/images/partners/martian.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="text-content">
+                            <div class="title">Install Fewcha Wallet</div>
+                            
+                        </div>
+                        <div class="icon">
+                            <img src="assets/images/partners/fewcha.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="text-content">
+                            <div class="title">Install Aptos Wallet</div>
+                            
+                        </div>
+                        <div class="icon">
+                            <img src="assets/images/partners/aptos.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="popup-fix" id="selectToken">
+        <div class="overlay"></div>
+        <div class="popup-content">
+            <div class="popup-head">
+                <!-- <div class="title">Connect to a wallet</div> -->
+                <div class="close">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" data-v-1cdb86ff=""><circle cx="8" cy="8" r="7.4" stroke="white" stroke-width="1.2" data-v-1cdb86ff=""></circle><line x1="4.39361" y1="11.4644" x2="11.4647" y2="4.39334" stroke="white" stroke-width="1.2" data-v-1cdb86ff=""></line><line x1="4.5351" y1="4.3941" x2="11.6062" y2="11.4652" stroke="white" stroke-width="1.2" data-v-1cdb86ff=""></line></svg>
+                </div>
+            </div>
+            <div class="popup-body">
+                <div class="wallet-list -token">
+                  <div id="token_list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="popup_swap_sucessfully" class="toast-box" style="display: none;">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g filter="url(#filter0_b_392_349)">
+                <circle cx="18" cy="18" r="14" stroke="#00F030" stroke-width="1.4"></circle>
+            </g>
+            <path d="M24.9423 13.9426L16.8032 22.0817L11.5232 16.8017" stroke="#00F030" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+            <defs>
+                <filter id="filter0_b_392_349" x="-0.699951" y="-0.700195" width="37.3999" height="37.4004" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                    <feGaussianBlur in="BackgroundImage" stdDeviation="2"></feGaussianBlur>
+                    <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_392_349"></feComposite>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_392_349" result="shape"></feBlend>
+                </filter>
+            </defs>
+        </svg>
+        <div class="popup--content">
+            <div class="popup--text" id="popup_swap_from"></div>
+            <div class="popup--text" id="popup_swap_to"></div>
+            <a id="view_explorer" class="explorer" href="" target="_blank">View on Explorer</a>
+        </div>
+        <div class="close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C3C5CB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </div>
+        <div class="toast-fader"></div>
+    </div>
+    <script>
+        $('[data-toggle="modal"]').click(function(){
+            var id=$(this).attr('data-target');
+            console.log(id);
+            $(id).addClass('show');
+        });
+        $(".popup-fix .overlay,.popup-fix .close").click(function(){
+            $(this).parents(".popup-fix").removeClass("show");
+        });
+        $(".swap-action .icon-setting").click(function(){
+            $(this).parent().find(".menu-layout").toggleClass("show");
+
+        });
+        $(".menu-layout .overlay").click(function(){
+            $(this).parent().removeClass("show");
+        });
+        $(".accordion .accordion__top").click(function(){
+            $(this).parent().toggleClass("show");
+        });
+        // setTimeout(function(){
+        //     $(".toast-box").remove();
+        // },5000);
+        $(".toast-box .close").click(function(){
+            $(this).parent().remove();
+        });
+    </script>
+    <script src="./bundle.js" type="text/javascript"></script>
+  </body>
+</html>
